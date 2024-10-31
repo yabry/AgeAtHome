@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "stackbit-dev": "npx @stackbit/cli dev",
+    "stackbit-build": "npx @stackbit/cli build"
   },
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "@stackbit/cli": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
