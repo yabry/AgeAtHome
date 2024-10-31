@@ -1,6 +1,17 @@
 [build]
+base = "your-subdirectory"    # Add this line with the correct folder name
 command = "npm run build"
 publish = ".next"
 
 [build.environment]
 NODE_VERSION = "18"
+
+[dev]
+command = "stackbit dev"
+targetPort = 3000
+
+[context.production]
+command = "stackbit build"
+
+[context.deploy-preview]
+command = "stackbit build"
