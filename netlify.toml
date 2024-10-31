@@ -1,5 +1,5 @@
 [build]
-base = "your-subdirectory"    # Add this line with the correct folder name
+base = "/"    # Add this line with the correct folder name
 command = "npm run build"
 publish = ".next"
 
