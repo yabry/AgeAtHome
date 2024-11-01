@@ -17,7 +17,7 @@ export default function Home() {
             // Google Ads Conversion Tracking
             if (window.gtag) {
               gtag('event', 'conversion', {
-                'send_to': '16761441213/KGL3CIGnv-QZEL2Xvbg-'  // Replace with your actual values
+                'send_to': 'AW-16761441213/KGL3CIGnv-QZEL2Xvbg-'  // Replace with your actual values
               });
             }
             
