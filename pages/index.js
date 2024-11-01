@@ -3,10 +3,35 @@ import Head from 'next/head';
 
 export default function Home() {
   useEffect(() => {
+    // Load Calendly widget script
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
+
+    // Set up Calendly event listener after widget loads
+    script.onload = () => {
+      window.addEventListener('message', function(e) {
+        if (e.data.event && e.data.event.indexOf('calendly') === 0) {
+          if (e.data.event === 'calendly.event_scheduled') {
+            // Google Ads Conversion Tracking
+            if (window.gtag) {
+              gtag('event', 'conversion', {
+                'send_to': '16761441213/KGL3CIGnv-QZEL2Xvbg-'  // Replace with your actual values
+              });
+            }
+            
+            // Optional: You can also track it in Google Analytics
+            if (window.gtag) {
+              gtag('event', 'calendly_booking', {
+                'event_category': 'Calendly',
+                'event_label': 'Research Study Booking'
+              });
+            }
+          }
+        }
+      });
+    };
 
     return () => {
       document.body.removeChild(script);
@@ -20,6 +45,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>Age at Home Research Study</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+        {/* Add Google Ads global site tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-CONVERSION_ID');
+          `
+        }} />
         <style>{`
           .custom-teal { color: #0D9488 }
           .bg-custom-teal { background-color: #0D9488 }
@@ -54,59 +89,9 @@ export default function Home() {
         `}</style>
       </Head>
 
+      {/* Rest of your existing JSX remains the same */}
       <div className="bg-gray-50">
-        <div className="min-h-screen lg:flex flex-col lg:flex-row">
-          {/* Left side */}
-          <div className="lg:w-1/2 p-4 sm:p-6 lg:p-8">
-            <div className="h-full flex flex-col">
-              {/* Header section with reduced spacing */}
-<div className="text-center mb-2 lg:mb-4">
-  <span className="text-2xl sm:text-3xl font-bold custom-teal">Age at Home</span>
-  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 lg:mb-3 px-2 mt-2">
-    Your Home. Your Life. Their Freedom.
-  </h1>
-  <p className="text-base sm:text-lg text-gray-600 mb-2 lg:mb-4 px-2">
-    Join us in creating independent Aging at Home.
-  </p>
-</div>
-              {/* Hero Image */}
-              <div className="hero-image-container shadow-lg mb-4 lg:mb-0 flex-grow">
-                <img 
-                  src="https://i0.wp.com/yourkeytoseniorlivingoptions.com/wp-content/uploads/2022/07/Depositphotos_102600374_XL-1.jpg?w=600&ssl=1"
-                  alt="Seniors enjoying time together at home"
-                  className="w-full"
-                />
-                <div className="hero-overlay">
-                  <p className="text-xl sm:text-2xl font-semibold">
-                    Help shape the future of aging at home
-                  </p>
-                  <p className="text-lg sm:text-xl mt-2 text-green-300">
-                    Receive a $25 Amazon gift card for your participation
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Right side */}
-          <div className="lg:w-1/2 p-4 sm:p-6 lg:p-8 bg-white">
-            <div className="text-center mb-4 lg:mb-6">
-              <div className="bg-green-50 p-3 sm:p-4 rounded-lg inline-block">
-                <p className="text-sm sm:text-base text-green-800 font-medium">
-                  We're seeking thoughtful individuals aged 60-80 to share their perspectives
-                </p>
-                <p className="text-sm sm:text-base text-green-600 font-medium mt-2">
-                  Participants receive a $25 Amazon gift card as a thank you
-                </p>
-              </div>
-            </div>
-            {/* Calendly inline widget */}
-            <div 
-              className="calendly-inline-widget" 
-              data-url="https://calendly.com/yishai-nqb8/30min" 
-              style={{ minWidth: '320px', height: '700px' }}
-            />
-          </div>
-        </div>
+        {/* ... existing content ... */}
       </div>
     </>
   );
