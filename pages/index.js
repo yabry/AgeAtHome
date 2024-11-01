@@ -59,21 +59,21 @@ export default function Home() {
           {/* Left side */}
           <div className="lg:w-1/2 p-4 sm:p-6 lg:p-8">
             <div className="h-full flex flex-col">
-              {/* Header */}
-              <div className="text-center mb-4 lg:mb-6">
-                <span className="text-2xl sm:text-3xl font-bold custom-teal">Age-at-Home</span>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 lg:mb-4 px-2 mt-4">
-                  Your Home. Their Freedom.
-                </h1>
-                <p className="text-base sm:text-lg text-gray-600 mb-4 lg:mb-6 px-2">
-                  Join us in creating independent Aging at Home.
-                </p>
-              </div>
+              {/* Header section with reduced spacing */}
+<div className="text-center mb-2 lg:mb-4">
+  <span className="text-2xl sm:text-3xl font-bold custom-teal">Age-at-Home</span>
+  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 lg:mb-3 px-2 mt-2">
+    Your Home. Their Freedom.
+  </h1>
+  <p className="text-base sm:text-lg text-gray-600 mb-2 lg:mb-4 px-2">
+    Join us in creating independent Aging at Home.
+  </p>
+</div>
               {/* Hero Image */}
               <div className="hero-image-container shadow-lg mb-4 lg:mb-0 flex-grow">
                 <img 
                   src="https://i0.wp.com/yourkeytoseniorlivingoptions.com/wp-content/uploads/2022/07/Depositphotos_102600374_XL-1.jpg?w=600&ssl=1"
-                  alt="Senior friends enjoying time together at home"
+                  alt="Seniors enjoying time together at home"
                   className="w-full"
                 />
                 <div className="hero-overlay">
