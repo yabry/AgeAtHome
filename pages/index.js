@@ -63,7 +63,7 @@ export default function Home() {
 <div className="text-center mb-2 lg:mb-4">
   <span className="text-2xl sm:text-3xl font-bold custom-teal">Age at Home</span>
   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 lg:mb-3 px-2 mt-2">
-    Your Life. Your Home. Their Freedom.
+    Your Home. Your Life. Their Freedom.
   </h1>
   <p className="text-base sm:text-lg text-gray-600 mb-2 lg:mb-4 px-2">
     Join us in creating independent Aging at Home.
