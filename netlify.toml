@@ -4,6 +4,8 @@ publish = ".next"
 
 [build.environment]
 NODE_VERSION = "18"
+NEXT_WEBPACK_CACHE = "true"
+NEXT_USE_NETLIFY_EDGE = "true"
 
 [dev]
 command = "npm run stackbit-dev"
@@ -14,3 +16,6 @@ command = "npm run stackbit-build"
 
 [context.deploy-preview]
 command = "npm run stackbit-build"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
