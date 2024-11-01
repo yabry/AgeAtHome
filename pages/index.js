@@ -2,9 +2,69 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome to Age at Home</h1>
-      <p>This is your homepage.</p>
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Age-at-Home Research Study</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .custom-teal{color:#0D9488}.bg-custom-teal{background-color:#0D9488}.border-custom-teal{border-color:#0D9488}
+        .hero-image-container{position:relative;height:300px;overflow:hidden;border-radius:12px}
+        @media(min-width:768px){.hero-image-container{height:400px}}
+        .hero-image-container img{width:100%;height:100%;object-fit:cover}
+        .hero-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:1rem;color:white}
+        @media(min-width:768px){.hero-overlay{padding:2rem}}
+        body{overflow-x:hidden}
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen lg:flex flex-col lg:flex-row">
+        <!-- Left side -->
+        <div class="lg:w-1/2 p-4 sm:p-6 lg:p-8">
+            <div class="h-full flex flex-col">
+                <!-- Header -->
+                <div class="text-center mb-4 lg:mb-6">
+                    <span class="text-2xl sm:text-3xl font-bold custom-teal">Age-at-Home</span>
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 lg:mb-4 px-2 mt-4">
+                        Your Home. Their Freedom.
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-600 mb-4 lg:mb-6 px-2">
+                        Join us in creating innovative solutions for comfortable and independent aging at home.
+                    </p>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="hero-image-container shadow-lg mb-4 lg:mb-0 flex-grow">
+                    <img src="https://i0.wp.com/yourkeytoseniorlivingoptions.com/wp-content/uploads/2022/07/Depositphotos_102600374_XL-1.jpg?w=600&ssl=1?auto=format&fit=crop&w=800"
+                         alt="Senior friends enjoying time together at home"
+                         class="w-full">
+                    <div class="hero-overlay">
+                        <p class="text-xl sm:text-2xl font-semibold">
+                            Help shape the future of aging at home
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="lg:w-1/2 p-4 sm:p-6 lg:p-8 bg-white">
+            <div class="text-center mb-4 lg:mb-6">
+                <div class="bg-green-50 p-3 sm:p-4 rounded-lg inline-block">
+                    <p class="text-sm sm:text-base text-green-800 font-medium">
+                        We're seeking thoughtful individuals aged 65-70 to share their perspectives
+                    </p>
+                </div>
+            </div>
+            <div class="calendly-inline-widget" 
+                 data-url="https://calendly.com/yishai-nqb8/30min" 
+                 style="min-width:320px;height:600px;">
+            </div>
+            <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
     </div>
+</body>
+
   );
 }
