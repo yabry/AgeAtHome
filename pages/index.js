@@ -18,7 +18,7 @@ export default function Home() {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Age-at-Home Research Study</title>
+        <title>Age at Home Research Study</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
         <style>{`
           .custom-teal { color: #0D9488 }
@@ -61,9 +61,9 @@ export default function Home() {
             <div className="h-full flex flex-col">
               {/* Header section with reduced spacing */}
 <div className="text-center mb-2 lg:mb-4">
-  <span className="text-2xl sm:text-3xl font-bold custom-teal">Age-at-Home</span>
+  <span className="text-2xl sm:text-3xl font-bold custom-teal">Age at Home</span>
   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 lg:mb-3 px-2 mt-2">
-    Your Home. Their Freedom.
+    Your Life. Your Home. Their Freedom.
   </h1>
   <p className="text-base sm:text-lg text-gray-600 mb-2 lg:mb-4 px-2">
     Join us in creating independent Aging at Home.
