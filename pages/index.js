@@ -38,6 +38,7 @@ export default function Home() {
 
     calendlyScript.onload = () => {
       setIsCalendlyLoaded(true);
+      console.log('Calendly widget loaded');
     };
 
     calendlyScript.onerror = () => {
@@ -77,6 +78,9 @@ export default function Home() {
             `
           }}
         />
+        
+        {/* Calendly CSS for styling */}
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
         
         {/* Basic Favicon */}
         <link rel="icon" href="/favicon.ico" />
@@ -184,7 +188,7 @@ export default function Home() {
               <div 
                 id="calendly-embed"
                 className="calendly-inline-widget" 
-                data-url="https://calendly.com/yishai-nqb8/30min?hide_gdpr_banner=1"
+                data-calendly-url="https://calendly.com/yishai-nqb8/30min?hide_gdpr_banner=1"
                 style={{ minWidth: '320px', height: '700px' }}
               />
             )}
