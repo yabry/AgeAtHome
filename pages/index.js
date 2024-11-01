@@ -66,7 +66,7 @@ export default function Home() {
                   Your Home. Their Freedom.
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 mb-4 lg:mb-6 px-2">
-                  Join us in creating innovative solutions for comfortable and independent aging at home.
+                  Join us in creating independent Aging at Home.
                 </p>
               </div>
               {/* Hero Image */}
@@ -92,7 +92,7 @@ export default function Home() {
             <div className="text-center mb-4 lg:mb-6">
               <div className="bg-green-50 p-3 sm:p-4 rounded-lg inline-block">
                 <p className="text-sm sm:text-base text-green-800 font-medium">
-                  We're seeking thoughtful individuals aged 65-70 to share their perspectives
+                  We're seeking thoughtful individuals aged 60-80 to share their perspectives
                 </p>
                 <p className="text-sm sm:text-base text-green-600 font-medium mt-2">
                   Participants receive a $25 Amazon gift card as a thank you
