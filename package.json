@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run stackbit-build && next build",
+    "build": "next build",
     "start": "next start",
     "stackbit-dev": "npx @stackbit/cli dev",
-    "stackbit-build": "npx @stackbit/cli build"
+    "stackbit-build": "npx @stackbit/cli build && npm run build"
   },
   "dependencies": {
     "next": "latest",
