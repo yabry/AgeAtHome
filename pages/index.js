@@ -31,7 +31,7 @@ export default function Home() {
 
     window.addEventListener('message', handleCalendlyEvent);
 
-    // Load Calendly
+    // Load Calendly widget script
     const calendlyScript = document.createElement('script');
     calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
     calendlyScript.async = true;
@@ -49,7 +49,7 @@ export default function Home() {
     document.head.appendChild(calendlyScript);
 
     return () => {
-      // Cleanup
+      // Cleanup scripts and event listener
       if (calendlyScript.parentNode) {
         document.head.removeChild(calendlyScript);
       }
@@ -59,6 +59,16 @@ export default function Home() {
       window.removeEventListener('message', handleCalendlyEvent);
     };
   }, []);
+
+  // Second useEffect to initialize Calendly widget if the script has loaded
+  useEffect(() => {
+    if (isCalendlyLoaded) {
+      window.Calendly.initInlineWidget({
+        url: 'https://calendly.com/yishai-nqb8/30min?hide_gdpr_banner=1',
+        parentElement: document.getElementById('calendly-embed'),
+      });
+    }
+  }, [isCalendlyLoaded]);
 
   return (
     <>
@@ -78,9 +88,6 @@ export default function Home() {
             `
           }}
         />
-        
-        {/* Calendly CSS for styling */}
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
         
         {/* Basic Favicon */}
         <link rel="icon" href="/favicon.ico" />
@@ -187,8 +194,7 @@ export default function Home() {
             ) : (
               <div 
                 id="calendly-embed"
-                className="calendly-inline-widget" 
-                data-calendly-url="https://calendly.com/yishai-nqb8/30min?hide_gdpr_banner=1"
+                className="calendly-inline-widget"
                 style={{ minWidth: '320px', height: '700px' }}
               />
             )}
