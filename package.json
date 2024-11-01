@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run stackbit-build && next build",
     "start": "next start",
     "stackbit-dev": "npx @stackbit/cli dev",
     "stackbit-build": "npx @stackbit/cli build"
