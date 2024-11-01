@@ -1,40 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 export default function Home() {
-  useEffect(() => {
-    // Load Calendly widget script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
+  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
 
-    // Set up Calendly event listener after widget loads
-    script.onload = () => {
-      window.addEventListener('message', function(e) {
-        if (e.data.event && e.data.event.indexOf('calendly') === 0) {
-          if (e.data.event === 'calendly.event_scheduled') {
-            // Google Ads Conversion Tracking
-            if (window.gtag) {
-              gtag('event', 'conversion', {
-                'send_to': 'AW-16761441213/KGL3CIGnv-QZEL2Xvbg-'  // Replace with your actual values
-              });
-            }
-            
-            // Optional: You can also track it in Google Analytics
-            if (window.gtag) {
-              gtag('event', 'calendly_booking', {
-                'event_category': 'Calendly',
-                'event_label': 'Research Study Booking'
-              });
-            }
-          }
-        }
-      });
+  useEffect(() => {
+    // Load Google Ads conversion tracking script
+    const googleScript = document.createElement('script');
+    googleScript.async = true;
+    googleScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-16761441213';
+    document.head.appendChild(googleScript);
+
+    // Initialize gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16761441213');
+
+    // Add Calendly event listener for successful scheduling
+    function handleCalendlyEvent(e) {
+      if (e.data.event === 'calendly.event_scheduled') {
+        // Fire Google Ads conversion
+        gtag('event', 'conversion', {
+          'send_to': 'AW-16761441213/KGL3CIGnv-QZEL2Xvbg-'
+        });
+        console.log('Conversion tracked: Calendly appointment scheduled');
+      }
+    }
+
+    window.addEventListener('message', handleCalendlyEvent);
+
+    // Load Calendly
+    if (window.Calendly) {
+      setIsCalendlyLoaded(true);
+      return;
+    }
+
+    const calendlyScript = document.createElement('script');
+    calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
+    calendlyScript.async = true;
+
+    calendlyScript.onload = () => {
+      setIsCalendlyLoaded(true);
     };
 
+    calendlyScript.onerror = () => {
+      setLoadError(true);
+    };
+
+    document.head.appendChild(calendlyScript);
+
     return () => {
-      document.body.removeChild(script);
+      // Cleanup
+      document.head.removeChild(calendlyScript);
+      if (googleScript.parentNode) {
+        document.head.removeChild(googleScript);
+      }
+      window.removeEventListener('message', handleCalendlyEvent);
     };
   }, []);
 
@@ -43,18 +66,39 @@ export default function Home() {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Age at Home Research Study</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
-        {/* Add Google Ads global site tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-CONVERSION_ID');
-          `
-        }} />
+        <title>Age-at-Home Research Study</title>
+        
+        {/* Google Ads Conversion Tracking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-16761441213');
+            `
+          }}
+        />
+        
+        {/* Favicon */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0D9488" />
+        <meta name="theme-color" content="#0D9488" />
+        
+        {/* OpenGraph Meta Tags */}
+        <meta property="og:title" content="Age-at-Home Research Study" />
+        <meta property="og:description" content="Join us in creating independent Aging at Home. Participants receive a $25 Amazon gift card." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://age-at-home.netlify.app/" />
+        
+        <link 
+          href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" 
+          rel="stylesheet"
+          crossOrigin="anonymous"
+        />
         <style>{`
           .custom-teal { color: #0D9488 }
           .bg-custom-teal { background-color: #0D9488 }
@@ -89,9 +133,69 @@ export default function Home() {
         `}</style>
       </Head>
 
-      {/* Rest of your existing JSX remains the same */}
       <div className="bg-gray-50">
-        {/* ... existing content ... */}
+        <div className="min-h-screen lg:flex flex-col lg:flex-row">
+          {/* Left side */}
+          <div className="lg:w-1/2 p-4 sm:p-6 lg:p-8">
+            <div className="h-full flex flex-col">
+              {/* Header */}
+              <div className="text-center mb-4 lg:mb-6">
+                <span className="text-2xl sm:text-3xl font-bold custom-teal">Age-at-Home</span>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 lg:mb-4 px-2 mt-4">
+                  Your Home. Their Freedom.
+                </h1>
+                <p className="text-base sm:text-lg text-gray-600 mb-4 lg:mb-6 px-2">
+                  Join us in creating independent Aging at Home.
+                </p>
+              </div>
+              {/* Hero Image */}
+              <div className="hero-image-container shadow-lg mb-4 lg:mb-0 flex-grow">
+                <img 
+                  src="https://i0.wp.com/yourkeytoseniorlivingoptions.com/wp-content/uploads/2022/07/Depositphotos_102600374_XL-1.jpg?w=600&ssl=1"
+                  alt="Senior friends enjoying time together at home"
+                  className="w-full"
+                />
+                <div className="hero-overlay">
+                  <p className="text-xl sm:text-2xl font-semibold">
+                    Help shape the future of aging at home
+                  </p>
+                  <p className="text-lg sm:text-xl mt-2 text-green-300">
+                    Receive a $25 Amazon gift card for your participation
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Right side */}
+          <div className="lg:w-1/2 p-4 sm:p-6 lg:p-8 bg-white">
+            <div className="text-center mb-4 lg:mb-6">
+              <div className="bg-green-50 p-3 sm:p-4 rounded-lg inline-block">
+                <p className="text-sm sm:text-base text-green-800 font-medium">
+                  We're seeking thoughtful individuals aged 60-80 to share their perspectives
+                </p>
+                <p className="text-sm sm:text-base text-green-600 font-medium mt-2">
+                  Participants receive a $25 Amazon gift card as a thank you
+                </p>
+              </div>
+            </div>
+            {/* Calendly widget with loading state */}
+            {loadError ? (
+              <div className="text-center p-4 text-red-600">
+                Failed to load scheduling widget. Please refresh the page or try again later.
+              </div>
+            ) : !isCalendlyLoaded ? (
+              <div className="text-center p-4">
+                Loading scheduling widget...
+              </div>
+            ) : (
+              <div 
+                className="calendly-inline-widget" 
+                data-url="https://calendly.com/yishai-nqb8/30min" 
+                style={{ minWidth: '320px', height: '700px' }}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </>
   );
