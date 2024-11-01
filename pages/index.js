@@ -32,11 +32,6 @@ export default function Home() {
     window.addEventListener('message', handleCalendlyEvent);
 
     // Load Calendly
-    if (window.Calendly) {
-      setIsCalendlyLoaded(true);
-      return;
-    }
-
     const calendlyScript = document.createElement('script');
     calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
     calendlyScript.async = true;
@@ -47,13 +42,16 @@ export default function Home() {
 
     calendlyScript.onerror = () => {
       setLoadError(true);
+      console.error('Failed to load Calendly widget');
     };
 
     document.head.appendChild(calendlyScript);
 
     return () => {
       // Cleanup
-      document.head.removeChild(calendlyScript);
+      if (calendlyScript.parentNode) {
+        document.head.removeChild(calendlyScript);
+      }
       if (googleScript.parentNode) {
         document.head.removeChild(googleScript);
       }
@@ -80,13 +78,8 @@ export default function Home() {
           }}
         />
         
-        {/* Favicon */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0D9488" />
-        <meta name="theme-color" content="#0D9488" />
+        {/* Basic Favicon */}
+        <link rel="icon" href="/favicon.ico" />
         
         {/* OpenGraph Meta Tags */}
         <meta property="og:title" content="Age-at-Home Research Study" />
@@ -189,8 +182,9 @@ export default function Home() {
               </div>
             ) : (
               <div 
+                id="calendly-embed"
                 className="calendly-inline-widget" 
-                data-url="https://calendly.com/yishai-nqb8/30min" 
+                data-url="https://calendly.com/yishai-nqb8/30min?hide_gdpr_banner=1"
                 style={{ minWidth: '320px', height: '700px' }}
               />
             )}
