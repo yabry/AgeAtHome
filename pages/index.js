@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 
 export default function Home() {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -9,7 +20,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>Age-at-Home Research Study</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
-        <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
         <style>{`
           .custom-teal { color: #0D9488 }
           .bg-custom-teal { background-color: #0D9488 }
@@ -70,6 +80,9 @@ export default function Home() {
                   <p className="text-xl sm:text-2xl font-semibold">
                     Help shape the future of aging at home
                   </p>
+                  <p className="text-lg sm:text-xl mt-2 text-green-300">
+                    Receive a $25 Amazon gift card for your participation
+                  </p>
                 </div>
               </div>
             </div>
@@ -81,12 +94,16 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-green-800 font-medium">
                   We're seeking thoughtful individuals aged 65-70 to share their perspectives
                 </p>
+                <p className="text-sm sm:text-base text-green-600 font-medium mt-2">
+                  Participants receive a $25 Amazon gift card as a thank you
+                </p>
               </div>
             </div>
+            {/* Calendly inline widget */}
             <div 
               className="calendly-inline-widget" 
               data-url="https://calendly.com/yishai-nqb8/30min" 
-              style={{ minWidth: '320px', height: '600px' }}
+              style={{ minWidth: '320px', height: '700px' }}
             />
           </div>
         </div>
